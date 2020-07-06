@@ -75,6 +75,7 @@ class _SolicitarServicoScreenState extends State<SolicitarServico> {
   }*/
 
   _moveCamera(double latitude, double longitude) {
+    print('na camera');
     mapController.animateCamera(CameraUpdate.newCameraPosition(
         CameraPosition(target: LatLng(latitude, longitude), zoom: 18)));
   }
@@ -115,6 +116,7 @@ class _SolicitarServicoScreenState extends State<SolicitarServico> {
   }
 
   void sendRequest(String intendedLocation) async {
+    print('entrou');
     List<Placemark> placemark =
         await Geolocator().placemarkFromAddress(intendedLocation);
     double latitude = placemark[0].position.latitude;
@@ -283,7 +285,7 @@ class _SolicitarServicoScreenState extends State<SolicitarServico> {
                 onTap: () async {
                   Prediction p = await PlacesAutocomplete.show(
                       context: context,
-                      apiKey: "",
+                      apiKey: "Key",
                       language: "pt",
                       components: [
                         Component(Component.country, "br"),
@@ -293,6 +295,8 @@ class _SolicitarServicoScreenState extends State<SolicitarServico> {
                     setState(() {
                       _controllerLocal.text = p.description;
                     });
+
+                    sendRequest(_controllerLocal.text);
                   } else {
                     print('deu ruimn');
                   }
@@ -301,7 +305,6 @@ class _SolicitarServicoScreenState extends State<SolicitarServico> {
                 controller: _controllerLocal,
                 textInputAction: TextInputAction.go,
                 onSubmitted: (value) {
-                  sendRequest(value);
                   print(_controllerLocal.text);
                 },
                 decoration: InputDecoration(
