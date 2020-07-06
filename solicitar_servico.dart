@@ -283,7 +283,7 @@ class _SolicitarServicoScreenState extends State<SolicitarServico> {
                 onTap: () async {
                   Prediction p = await PlacesAutocomplete.show(
                       context: context,
-                      apiKey: "AIzaSyDYptBoAL1m_TOJQ19MqSfXESHCj6338BU",
+                      apiKey: "",
                       language: "pt",
                       components: [
                         Component(Component.country, "br"),
